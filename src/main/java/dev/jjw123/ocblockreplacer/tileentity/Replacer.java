@@ -17,12 +17,16 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+
+import javax.annotation.Nullable;
 
 public class Replacer extends TileEntityEnvironment implements ISidedInventory {
 
@@ -36,16 +40,6 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
                 .withComponent(TAG_NODE, Visibility.Network)
                 .withConnector().create();
     }
-
-    @Override
-    public void onMessage(Message message) {}
-
-
-    @Override
-    public void onConnect(Node node) {}
-
-    @Override
-    public void onDisconnect(Node node) {}
 
     @Callback(doc = "function(posX, posZ, negX, negZ, y, block):boolean --  Replaces block of name 'block' with the block stored in the internal inventory")
     public Object[] replace(final Context context, final Arguments args) throws Exception {
@@ -115,6 +109,7 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
                 }
             }
         }
+        markDirty();
 
         return null;
     }
@@ -250,7 +245,6 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
 
         this.replacerItemStacks = NonNullList.<ItemStack> withSize(this.getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, this.replacerItemStacks);
-
     }
 
     @Override
@@ -261,5 +255,35 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
         ItemStackHelper.saveAllItems(compound, this.replacerItemStacks);
 
         return compound;
+    }
+
+    @Override
+    public void markDirty() {
+
+        this.world.markBlockRangeForRenderUpdate(pos, pos);
+        this.world.notifyBlockUpdate(pos, getState(), getState(), 3);
+        this.world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
+    }
+
+    private IBlockState getState() {
+
+        return this.world.getBlockState(pos);
+    }
+
+    @Override
+    @Nullable
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return this.writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(pkt.getNbtCompound());
     }
 }

@@ -20,11 +20,11 @@ public class ReplacerTESR extends TileEntitySpecialRenderer<Replacer> {
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) x, (float) y, (float) z);
 
-        renderItem(new ItemStack(Blocks.DIRT, 64)/*te.getStackInSlot(0)*/, 0.5f, 0.15f, 0.25f, 0.7f, partialTicks, timeD);
+        renderItem(/*new ItemStack(Blocks.DIRT, 64)*/te.getStackInSlot(0), 0.5f, 0.15f, 0.25f, 0.7f, partialTicks, timeD);
 
         for(int i = 1; i < te.getSizeInventory(); i++) {
 
-            renderItem(new ItemStack(Blocks.SAND, 64)/*te.getStackInSlot(i)*/, 0.88f - (i * 0.08f), 0.22f, 0.9f - (i % 2 * 0.2f), 0.4f, partialTicks, timeD);
+            renderItem(/*new ItemStack(Blocks.SAND, 64)*/te.getStackInSlot(i), 0.88f - (i * 0.08f), 0.22f, 0.9f - (i % 2 * 0.2f), 0.4f, partialTicks, timeD);
         }
 
         GlStateManager.popMatrix();
