@@ -27,7 +27,7 @@ fancyGradle {
     }
 }
 
-version = '1.0'
+version = '1.0.0'
 group = 'dev.jjw123.ocblockreplacer' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ocblockreplacer'
 

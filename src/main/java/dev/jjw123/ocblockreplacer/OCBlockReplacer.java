@@ -25,6 +25,7 @@ import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 @Mod(
         modid = OCBlockReplacer.MOD_ID,
         name = OCBlockReplacer.MOD_NAME,
+        version = "1.0.0",
         dependencies = "required-after:opencomputers"
 )
 public class OCBlockReplacer {

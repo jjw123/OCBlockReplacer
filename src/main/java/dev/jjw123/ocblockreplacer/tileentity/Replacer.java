@@ -41,7 +41,7 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
                 .withConnector().create();
     }
 
-    @Callback(doc = "function(posX, posZ, negX, negZ, y, block):boolean --  Replaces block of name 'block' with the block stored in the internal inventory")
+    @Callback(doc = "function(posX, posZ, negX, negZ, y, block):number --  Replaces block of name 'block' with the block stored in the internal inventory. Returns the number of blocks replaced.")
     public Object[] replace(final Context context, final Arguments args) throws Exception {
 
         int posX = args.checkInteger(0);
@@ -50,6 +50,8 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
         int negZ = args.checkInteger(3);
         int y = args.checkInteger(4);
         String block = args.checkString(5);
+
+        int replaced = 0;
 
         for(int x = this.getPos().getX() - negX; x <= this.getPos().getX() + posX; x++) {
 
@@ -104,6 +106,8 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
                         IBlockState placeState = ib.getBlock().getStateForPlacement(this.world, pos, EnumFacing.UP, 0, 0, 0, place.getMetadata(), FakePlayerFactory.getMinecraft((WorldServer) this.world), EnumHand.MAIN_HAND);
 
                         world.setBlockState(pos, placeState);
+
+                        replaced++;
                     }
 
                 }
@@ -111,7 +115,7 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
         }
         markDirty();
 
-        return null;
+        return new Object[]{replaced};
     }
 
     @Override
