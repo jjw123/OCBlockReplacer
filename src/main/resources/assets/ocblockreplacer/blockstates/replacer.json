@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "ocblockreplacer:block/particle",
+      "texture": "ocblockreplacer:block/texture",
+      "voxels_palette": "ocblockreplacer:block/voxels_palette",
+      "voxels_atlas": "ocblockreplacer:block/voxels_atlas"
+    },
+    "model": "ocblockreplacer:replacer"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{
+      "transform": "forge:default-block"
+    }],
+    "facing": {
+      "north": {"model": "ocblockreplacer:replacer"},
+      "south": {"model": "ocblockreplacer:replacer", "y": 180},
+      "west": {"model": "ocblockreplacer:replacer", "y": 270},
+      "east": {"model": "ocblockreplacer:replacer", "y": 90}
+    }
+  }
+}

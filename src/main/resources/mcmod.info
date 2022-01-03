@@ -1,0 +1,16 @@
+[
+    {
+      "modid": "ocblockreplacer",
+      "name": "OC Block Replacer",
+      "description": "OC Block Replacer.",
+      "version": "${version}",
+      "mcversion": "${mcversion}",
+      "url": "",
+      "updateUrl": "",
+      "authorList": ["jjw123"],
+      "credits": "",
+      "logoFile": "",
+      "screenshots": [],
+      "dependencies": []
+    }
+]
