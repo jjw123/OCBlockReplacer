@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "dpd",
+    "aga",
+    "sts"
+  ],
+  "key":
+  {
+    "d": {
+      "item": "opencomputers:material",
+      "data": 23
+    },
+    "p": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "a": {
+      "item": "opencomputers:adapter",
+      "data": 0
+    },
+    "g": {
+      "item": "opencomputers:geolyzer",
+      "data": 0
+    },
+    "s": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "t": {
+      "item": "opencomputers:transposer",
+      "data": 0
+    }
+  },
+  "result":
+  {
+    "item": "ocblockreplacer:replacer",
+    "count": 1
+  }
+}
