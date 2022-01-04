@@ -4,8 +4,6 @@ import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.Message;
-import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.TileEntityEnvironment;
 import net.minecraft.block.Block;
@@ -243,8 +241,8 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound)
-    {
+    public void readFromNBT(NBTTagCompound compound) {
+
         super.readFromNBT(compound);
 
         this.replacerItemStacks = NonNullList.<ItemStack> withSize(this.getSizeInventory(), ItemStack.EMPTY);
@@ -252,8 +250,8 @@ public class Replacer extends TileEntityEnvironment implements ISidedInventory {
     }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+
         super.writeToNBT(compound);
 
         ItemStackHelper.saveAllItems(compound, this.replacerItemStacks);
