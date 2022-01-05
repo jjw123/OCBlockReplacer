@@ -25,7 +25,7 @@ import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 @Mod(
         modid = OCBlockReplacer.MOD_ID,
         name = OCBlockReplacer.MOD_NAME,
-        version = "1.0.0",
+        version = "1.0.2",
         dependencies = "required-after:opencomputers"
 )
 public class OCBlockReplacer {
@@ -35,7 +35,6 @@ public class OCBlockReplacer {
 
     @Mod.Instance(MOD_ID)
     public static OCBlockReplacer INSTANCE;
-
 
     static HashSet<Block> modBlocks = new HashSet<>();
 
